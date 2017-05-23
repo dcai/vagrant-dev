@@ -1,0 +1,41 @@
+- name: $HOME | Cleanup
+  file:
+    src: "{{ item.src | default(omit) }}"
+    dest: "{{ item.dest }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { dest: '/home/ubuntu/.bashrc', state: 'absent' }
+    - { dest: '/home/ubuntu/.vimrc', state: 'absent' }
+    - { dest: '/home/ubuntu/.tmux.conf', state: 'absent' }
+
+- name: $HOME | Create .local
+  file:
+    path: /home/ubuntu/.local/bin
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: 0775
+
+- name: $HOME | download .vimrc
+  get_url:
+    url: https://gist.githubusercontent.com/dcai/cd2b8102218eb8381e6a1aacc80a0cb0/raw/b0087b5bc7c950bd56241d74c53186bd3ebd4e88/.vimrc
+    owner: ubuntu
+    group: ubuntu
+    dest: /home/ubuntu/.vimrc
+    mode: 0640
+
+- name: $HOME | download .bashrc
+  get_url:
+    url: https://gist.githubusercontent.com/dcai/fe2661d017dcbfd19804bbe1b702af08/raw/cba58cc0d9e071eb979a2dd715988286d62915cf/.bashrc
+    dest: /home/ubuntu/.bashrc
+    owner: ubuntu
+    group: ubuntu
+    mode: 0640
+
+- name: $HOME | download .tmux.conf
+  get_url:
+    url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/8fe17ebb5a51180fe0a677784af05899d3a3ee25/.tmux.conf
+    dest: /home/ubuntu/.tmux.conf
+    owner: ubuntu
+    group: ubuntu
+    mode: 0640

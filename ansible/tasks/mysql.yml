@@ -1,0 +1,73 @@
+---
+- name: MySQL | Uninstall
+  apt: name={{item}} state=absent
+  with_items:
+    mysql-server
+    mysql-client
+
+- name: MariaDB | Install MariadB Server
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - mariadb-server-10.0
+    - python-mysqldb
+
+- name: MariaDB | Setup MariaDB root password
+  mysql_user:
+    name: "root"
+    password: "mysql"
+    host: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+  notify:
+    - restart mysql
+
+- name: MariaDB | Setup MariaDB creds for root user
+  template:
+    src: templates/my.cnf
+    dest: "/root/.my.cnf"
+    owner: "root"
+    mode: 0600
+
+- name: MariaDB | Setup MariaDB creds for ubuntu user
+  template:
+    src: templates/my.cnf
+    dest: "/home/ubuntu/.my.cnf"
+    owner: "ubuntu"
+    mode: 0600
+
+- name: MariaDB | Delete blank MariaDB users
+  mysql_user:
+    name: ""
+    host: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: MariaDB | Drop MariaDB test database
+  mysql_db:
+    name: test
+    state: absent
+
+- name: MariaDB | Setup empty database for moodle
+  mysql_db:
+    name: "moodle"
+    encoding: "utf8"
+    collation: "utf8_unicode_ci"
+    state: "present"
+    login_user: "root"
+    login_password: "mysql"
+
+- name: MariaDB | Setup MariaDB user for Moodle
+  mysql_user:
+    name: "moodle"
+    password: "moodle"
+    host: "localhost"
+    priv: "moodle.*:ALL"
+    state: "present"

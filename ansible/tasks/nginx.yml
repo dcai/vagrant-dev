@@ -1,0 +1,36 @@
+- name: NGINX | Install the Repository
+  apt_repository:
+    repo: 'ppa:nginx/stable'
+    state: present
+
+- name: NGINX | Install
+  apt:
+    name: nginx
+    state: installed
+    update_cache: yes
+
+- name: NGINX | Copy the templates to their respestive estination
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ httpd_user }}"
+    group: "{{ httpd_group }}"
+  with_items:
+    - { src: 'templates/nginx.conf', dest: '/etc/nginx/nginx.conf' }
+    - { src: 'templates/nginx-php_params.conf', dest: '/etc/nginx/php_params' }
+    - { src: 'templates/nginx-phpfpm.conf', dest: '/etc/nginx/phpfpm.conf' }
+    - { src: 'templates/nginx-vhost.conf', dest: '/etc/nginx/sites-available/home.conf' }
+  notify:
+    - restart nginx
+
+- name: NGINX | Perform action of the desired files
+  file:
+    src: "{{ item.src | default(omit) }}"
+    dest: "{{ item.dest }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { dest: '/etc/nginx/sites-enabled/default', state: 'absent' }
+    - { dest: '/var/www/html/index.nginx-debian.html', state: 'absent' }
+    - { src: '/etc/nginx/sites-available/home.conf', dest: '/etc/nginx/sites-enabled/home.conf', state: 'link' }
+  notify:
+    - restart nginx

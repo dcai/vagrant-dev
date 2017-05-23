@@ -1,0 +1,51 @@
+- name: PHP | Install Ondrej PHP PPA
+  apt_repository: repo='ppa:ondrej/php' update_cache=yes
+
+- name: PHP | Install PHP and its modules
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - php{{ php_version }}
+    - php{{ php_version }}-fpm
+    - php{{ php_version }}-cli
+    - php{{ php_version }}-intl
+    - php{{ php_version }}-curl
+    - php{{ php_version }}-gd
+    - php{{ php_version }}-imagick
+    - php{{ php_version }}-mysql
+    - php{{ php_version }}-xml
+    - php{{ php_version }}-xmlrpc
+    - php{{ php_version }}-soap
+    - php{{ php_version }}-mbstring
+    - php{{ php_version }}-zip
+    - php{{ php_version }}-xdebug
+    - php{{ php_version }}-opcache
+
+- name: PHP | Install PHP memcached and redis ext
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - php-memcached
+
+- name: PHP-FPM | Copy config
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ httpd_user }}"
+    group: "{{ httpd_group }}"
+  with_items:
+    - { src: 'templates/php{{ php_version }}.ini', dest: '/etc/php/{{ php_version }}/fpm/php.ini' }
+    - { src: 'templates/opcache.ini', dest: '/etc/php/{{ php_version }}/mods-available/xdebug.ini' }
+    - { src: 'templates/xdebug.ini', dest: '/etc/php/{{ php_version }}/mods-available/opcache.ini' }
+    - { src: 'templates/php-fpm-www{{ php_version }}.conf', dest: '/etc/php/{{ php_version }}/fpm/pool.d/www.conf' }
+  notify:
+    - restart php-fpm
+# - name: Set up XDebug for remote debugging
+  # template:
+    # src:  templates/xdebug.ini
+    # dest: /etc/php/{{ php_version }}/apache2/conf.d/xdebug-remote-debugging.ini
+
+- stat: path=/usr/local/bin/composer
+  register: composer_folder
+
+- name: PHP | Install Composer
+  shell: curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer
+  when: composer_folder.stat.isdir is not defined
