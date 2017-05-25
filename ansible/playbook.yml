@@ -8,6 +8,7 @@
     httpd_user: www-data
     httpd_group: www-data
     php_version: 7.1
+    nodejs_version: "6.x"
   tasks:
     - name: set timezone to Etc/UTC
       timezone:
@@ -17,7 +18,7 @@
     - include: tasks/user.yml
     - include: tasks/packages.yml
     - include: tasks/mysql.yml
-    # - include: tasks/efs.yml
+    - include: tasks/nodejs.yml
     # - include: tasks/java.yml
     # - include: tasks/vagrant.yml
     # - include: tasks/apache.yml
