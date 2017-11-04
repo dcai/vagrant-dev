@@ -1,24 +1,22 @@
 - name: Ubuntu | Install packages
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
+    - aptitude
     - aria2
     - cmake
-    - memcached
     - git
-    - tig
-    - unzip
-    - xz-utils
-    - unrar
     - htop
-    - aptitude
-    - vim
     - mariadb-client-10.0
     - mcrypt
+    - memcached
+    - mosh
+    - python-pip
     - ruby
+    - software-properties-common
     - tig
     - tmux
-    - mosh
     - tree
-    - python-pip
-    - software-properties-common
-
+    - unrar
+    - unzip
+    - vim
+    - xz-utils
