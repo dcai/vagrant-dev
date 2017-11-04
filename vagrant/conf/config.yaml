@@ -1,20 +1,21 @@
- vm:
-   shares:
-     code:
-       host_dir: './code'
-       vm_mount_point: '/var/www'
-       type: 'nfs_guest'
-     vagrant:
-       host_dir: '.'
-       vm_mount_point: '/vagrant'
-       type: ''
-     src:
-       host_dir: '../../src'
-       vm_mount_point: '/var/hostsrc'
-       type: ''
-     dropbox:
-       owner: 'ubuntu'
-       group: 'ubuntu'
-       host_dir: '../../Dropbox/'
-       vm_mount_point: '/home/ubuntu/Dropbox'
-       type: ''
+---
+vm:
+  shares:
+    code:
+      host_dir: './code'
+      vm_mount_point: '/var/www'
+      type: 'nfs_guest'
+    vagrant:
+      host_dir: '.'
+      vm_mount_point: '/vagrant'
+      type: ''
+    src:
+      host_dir: '../../src'
+      vm_mount_point: '/var/hostsrc'
+      type: ''
+    dropbox:
+      owner: 'ubuntu'
+      group: 'ubuntu'
+      host_dir: '../../Dropbox/'
+      vm_mount_point: '/home/ubuntu/Dropbox'
+      type: ''

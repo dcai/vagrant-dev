@@ -1,3 +1,4 @@
+---
 - name: $HOME | Cleanup
   file:
     src: "{{ item.src | default(omit) }}"

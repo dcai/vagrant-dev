@@ -1,3 +1,4 @@
+---
 - name: NGINX | Install the Repository
   apt_repository:
     repo: 'ppa:nginx/stable'
