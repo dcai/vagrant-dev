@@ -33,8 +33,8 @@
     group: "{{ httpd_group }}"
   with_items:
     - { src: 'templates/php{{ php_version }}.ini', dest: '/etc/php/{{ php_version }}/fpm/php.ini' }
-    - { src: 'templates/opcache.ini', dest: '/etc/php/{{ php_version }}/mods-available/xdebug.ini' }
-    - { src: 'templates/xdebug.ini', dest: '/etc/php/{{ php_version }}/mods-available/opcache.ini' }
+    - { src: 'templates/opcache.ini', dest: '/etc/php/{{ php_version }}/mods-available/opcache.ini' }
+    - { src: 'templates/xdebug.ini', dest: '/etc/php/{{ php_version }}/mods-available/xdebug.ini' }
     - { src: 'templates/php-fpm-www{{ php_version }}.conf', dest: '/etc/php/{{ php_version }}/fpm/pool.d/www.conf' }
   notify:
     - restart php-fpm

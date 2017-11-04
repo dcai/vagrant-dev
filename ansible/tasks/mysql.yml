@@ -35,7 +35,7 @@
 - name: MariaDB | Setup MariaDB creds for ubuntu user
   template:
     src: templates/my.cnf
-    dest: "/home/ubuntu/.my.cnf"
+    dest: "{{ home_dir }}/.my.cnf"
     owner: "ubuntu"
     mode: 0600
 

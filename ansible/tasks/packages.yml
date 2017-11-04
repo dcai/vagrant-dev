@@ -1,6 +1,8 @@
 - name: Ubuntu | Install packages
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
+    - aria2
+    - cmake
     - memcached
     - git
     - tig
