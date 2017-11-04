@@ -26,6 +26,7 @@
     - include: tasks/packages.yml
     - include: tasks/mysql.yml
     - include: tasks/nodejs.yml
+    - include: tasks/pip.yml
     # - include: tasks/java.yml
     # - include: tasks/vagrant.yml
     # - include: tasks/apache.yml

@@ -1,0 +1,12 @@
+- name: Pip | Upgrade system pip packages
+  pip: name={{ item }}  state=present extra_args="--upgrade"
+  with_items:
+    - pip
+
+- name: Pip | install packages
+  pip: name={{ item }}  state=present extra_args="--user --upgrade"
+  with_items:
+    - tmuxp
+    - pgcli
+    - mycli
+    - httpie
