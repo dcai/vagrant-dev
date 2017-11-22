@@ -8,7 +8,11 @@ if ARGV.include?('--gui')
   $gui_enabled = true
 end
 
+
 $conf = YAML::load_file 'vagrant/conf/config.yaml'
+if Vagrant::Util::Platform.windows? then
+  $conf = YAML::load_file 'vagrant/conf/config-win.yaml'
+end
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"

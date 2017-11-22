@@ -1,0 +1,6 @@
+ vm:
+   shares:
+     vagrant:
+       host_dir: '.'
+       vm_mount_point: '/vagrant'
+       type: ''
