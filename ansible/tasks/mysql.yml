@@ -11,6 +11,17 @@
     - mariadb-server-10.0
     - python-mysqldb
 
+- name: MariaDB | innodb settings
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ mariadb_user }}"
+    group: "{{ mariadb_group }}"
+  with_items:
+    - { src: 'templates/mysql/innodb.cnf', dest: '/etc/mysql/conf.d/innodb.cnf' }
+  notify:
+    - restart mysql
+
 - name: MariaDB | Setup MariaDB root password
   mysql_user:
     name: "root"
@@ -25,16 +36,31 @@
   notify:
     - restart mysql
 
+- name: MariaDB | Setup MariaDB root password
+  mysql_user:
+    name: {{ home_username }}
+    password: {{ home_username }}
+    host: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+  notify:
+    - restart mysql
+
+
 - name: MariaDB | Setup MariaDB creds for root user
   template:
-    src: templates/my.cnf
+    src: templates/mysql/my.root.cnf
     dest: "/root/.my.cnf"
     owner: "root"
     mode: 0600
 
 - name: MariaDB | Setup MariaDB creds for ubuntu user
   template:
-    src: templates/my.cnf
+    src: templates/mysql/my.ubuntu.cnf
     dest: "{{ home_dir }}/.my.cnf"
     owner: "ubuntu"
     mode: 0600
@@ -71,3 +97,11 @@
     host: "localhost"
     priv: "moodle.*:ALL"
     state: "present"
+- name: phpMyAdmin
+  unarchive:
+    owner: {{ httpd_user }}
+    group: {{ httpd_group }}
+    mode: 0775
+    src: https://files.phpmyadmin.net/phpMyAdmin/4.7.6/phpMyAdmin-4.7.6-english.zip
+    dest: /var/www/phpmyadmin
+    remote_src: yes

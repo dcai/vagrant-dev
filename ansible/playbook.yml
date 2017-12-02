@@ -5,6 +5,9 @@
   become_user: root
   remote_user: ubuntu
   vars:
+    mariadb_user: root
+    mariadb_group: root
+    httpd_wwwroot: "/var/www"
     httpd_user: ubuntu
     httpd_group: ubuntu
     php_version: 7.1
