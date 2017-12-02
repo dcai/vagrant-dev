@@ -13,6 +13,7 @@
     - python-pip
     - ruby
     - software-properties-common
+    - silversearcher-ag
     - tig
     - tmux
     - tree
