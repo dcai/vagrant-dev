@@ -1,7 +1,7 @@
  vm:
    shares:
      code:
-       host_dir: 'code'
+       host_dir: './code'
        vm_mount_point: '/var/www'
        type: 'nfs_guest'
      vagrant:
