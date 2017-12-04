@@ -41,6 +41,7 @@
     name: "{{ home_username }}"
     password: "{{ home_username }}"
     host: "{{ item }}"
+    priv: '*.*:ALL,GRANT'
     state: present
   with_items:
     - "{{ ansible_hostname }}"
