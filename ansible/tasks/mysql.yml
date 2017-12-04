@@ -38,8 +38,8 @@
 
 - name: MariaDB | Setup MariaDB root password
   mysql_user:
-    name: {{ home_username }}
-    password: {{ home_username }}
+    name: "{{ home_username }}"
+    password: "{{ home_username }}"
     host: "{{ item }}"
     state: present
   with_items:
@@ -97,11 +97,15 @@
     host: "localhost"
     priv: "moodle.*:ALL"
     state: "present"
-- name: phpMyAdmin
+
+- name: phpMyAdmin | Download and unzip
   unarchive:
-    owner: {{ httpd_user }}
-    group: {{ httpd_group }}
+    owner: "{{ httpd_user }}"
+    group: "{{ httpd_group }}"
     mode: 0775
-    src: https://files.phpmyadmin.net/phpMyAdmin/4.7.6/phpMyAdmin-4.7.6-english.zip
-    dest: /var/www/phpmyadmin
+    src: "https://files.phpmyadmin.net/phpMyAdmin/{{phpmyadmin_version}}/phpMyAdmin-{{ phpmyadmin_version }}-english.zip"
+    dest: /var/www
     remote_src: yes
+
+- name: phpMyAdmin | rename directory
+  command: mv "/var/www/phpMyAdmin-{{phpmyadmin_version}}-english" "/var/www/phpmyadmin"

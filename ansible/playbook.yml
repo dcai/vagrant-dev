@@ -15,6 +15,7 @@
     home_dir: "/home/ubuntu"
     home_username: ubuntu
     home_usergroup: ubuntu
+    phpmyadmin_version: "4.7.6"
   tasks:
     - name: set timezone to Etc/UTC
       timezone:
