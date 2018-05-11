@@ -41,7 +41,7 @@
 
 - name: $HOME | download .tmux.conf
   get_url:
-    url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/8fe17ebb5a51180fe0a677784af05899d3a3ee25/.tmux.conf
+    url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/9295d4db1781be6b8f7852fab68cae0c63831ab9/.tmux.conf
     dest: "{{ home_dir }}/.tmux.conf"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
