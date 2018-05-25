@@ -15,7 +15,6 @@
     - ruby
     - silversearcher-ag
     - software-properties-common
-    - silversearcher-ag
     - tig
     - tmux
     - tree

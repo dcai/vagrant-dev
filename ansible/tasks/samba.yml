@@ -1,0 +1,20 @@
+---
+- name: Samba | Install Samba
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - samba
+
+- name: Samba | update config
+  blockinfile:
+    path: /etc/samba/smb.conf
+    block: |
+      [home]
+        comment = vagrant home export
+        path = {{ home_dir }}
+        read only = no
+        browsable = yes
+  notify:
+    - restart smbd
+
+- name: Samba | creating samba user
+  shell: "(echo {{ samba_pass }}; echo {{ samba_pass }}) | smbpasswd -s -a {{ samba_user }}"

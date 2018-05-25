@@ -5,6 +5,8 @@
   become_user: root
   remote_user: ubuntu
   vars:
+    samba_user: ubuntu
+    samba_pass: ubuntu
     mariadb_user: root
     mariadb_group: root
     httpd_wwwroot: "/var/www"
@@ -15,7 +17,7 @@
     home_dir: "/home/ubuntu"
     home_username: ubuntu
     home_usergroup: ubuntu
-    phpmyadmin_version: "4.7.6"
+    phpmyadmin_version: "4.8.1"
   tasks:
     - name: set timezone to Etc/UTC
       timezone:
@@ -27,6 +29,7 @@
     - include: tasks/mysql.yml
     - include: tasks/nodejs.yml
     - include: tasks/pip.yml
+    - include: tasks/samba.yml
     # - include: tasks/java.yml
     # - include: tasks/vagrant.yml
     # - include: tasks/apache.yml
@@ -39,3 +42,5 @@
       service: name=php{{ php_version }}-fpm state=restarted
     - name: restart mysql
       service: name=mysql state=restarted
+    - name: restart smbd
+      service: name=smbd state=restarted
