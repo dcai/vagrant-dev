@@ -99,6 +99,15 @@
     priv: "moodle.*:ALL"
     state: "present"
 
+- name: phpMyAdmin | Purge directory
+  file:
+    path: '/var/www/{{ item }}'
+    state: absent
+  with_items:
+    - "phpmyadmin"
+    - "phpMyAdmin-{{ phpmyadmin_version }}-english"
+    - "phpMyAdmin-{{ phpmyadmin_version }}-english.zip"
+
 - name: phpMyAdmin | Download and unzip
   unarchive:
     owner: "{{ httpd_user }}"
