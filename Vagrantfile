@@ -23,6 +23,19 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
 
   config.vm.network "private_network", ip: "172.16.0.2"
+
+  ## Proxy settings
+  # if Vagrant.has_plugin?("vagrant-proxyconf")
+    # config.proxy.http     = "http://192.168.0.2:3128/"
+    # config.proxy.https    = "http://192.168.0.2:3128/"
+    # config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
+  # end
+
+  # map a range of ports
+  for port in 3000..3020
+    config.vm.network :forwarded_port, guest: port, host: port
+  end
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
   config.vm.network "forwarded_port", guest: 8080, host: 8080
   config.vm.network "forwarded_port", guest: 22, host: 2229
 

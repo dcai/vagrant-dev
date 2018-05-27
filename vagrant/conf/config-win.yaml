@@ -4,9 +4,9 @@
        host_dir: '.'
        vm_mount_point: '/vagrant'
        type: ''
-     dropbox:
-       owner: 'ubuntu'
-       group: 'ubuntu'
-       host_dir: 'e:/Dropbox/'
-       vm_mount_point: '/home/ubuntu/Dropbox'
-       type: ''
+     # dropbox:
+       # owner: 'ubuntu'
+       # group: 'ubuntu'
+       # host_dir: 'e:/Dropbox/'
+       # vm_mount_point: '/home/ubuntu/Dropbox'
+       # type: ''
