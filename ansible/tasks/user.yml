@@ -19,7 +19,7 @@
 
 - name: $HOME | download .vimrc
   get_url:
-    url: https://gist.githubusercontent.com/dcai/cd2b8102218eb8381e6a1aacc80a0cb0/raw/b0087b5bc7c950bd56241d74c53186bd3ebd4e88/.vimrc
+    url: https://gist.githubusercontent.com/dcai/cd2b8102218eb8381e6a1aacc80a0cb0/raw/bf29d1b68410a0f902bace6b51a9900119a67a90/.vimrc
     dest: "{{ home_dir }}/.vimrc"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
