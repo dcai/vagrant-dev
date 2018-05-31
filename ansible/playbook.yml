@@ -25,6 +25,7 @@
     - include: tasks/php.yml
     - include: tasks/nginx.yml
     - include: tasks/user.yml
+    - include: tasks/sys.yml
     - include: tasks/packages.yml
     - include: tasks/mysql.yml
     - include: tasks/nodejs.yml
