@@ -98,24 +98,3 @@
     host: "localhost"
     priv: "moodle.*:ALL"
     state: "present"
-
-- name: phpMyAdmin | Purge directory
-  file:
-    path: '/var/www/{{ item }}'
-    state: absent
-  with_items:
-    - "phpmyadmin"
-    - "phpMyAdmin-{{ phpmyadmin_version }}-english"
-    - "phpMyAdmin-{{ phpmyadmin_version }}-english.zip"
-
-- name: phpMyAdmin | Download and unzip
-  unarchive:
-    owner: "{{ httpd_user }}"
-    group: "{{ httpd_group }}"
-    mode: 0775
-    src: "https://files.phpmyadmin.net/phpMyAdmin/{{phpmyadmin_version}}/phpMyAdmin-{{ phpmyadmin_version }}-english.zip"
-    dest: /var/www
-    remote_src: yes
-
-- name: phpMyAdmin | rename directory
-  command: mv "/var/www/phpMyAdmin-{{phpmyadmin_version}}-english" "/var/www/phpmyadmin"
