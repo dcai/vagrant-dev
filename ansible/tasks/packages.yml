@@ -17,7 +17,7 @@
     - git
     - htop
     - jq
-    - mariadb-client-10.0
+    - "mariadb-client-{{ mariadb_version }}"
     - mcrypt
     - memcached
     - mosh

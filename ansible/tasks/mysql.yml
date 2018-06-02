@@ -8,7 +8,7 @@
 - name: MariaDB | Install MariadB Server
   apt: pkg={{ item }} state=present
   with_items:
-    - mariadb-server-10.0
+    - "mariadb-server-{{ mariadb_version }}"
     - python-mysqldb
 
 - name: MariaDB | innodb settings
