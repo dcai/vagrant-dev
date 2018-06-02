@@ -15,12 +15,19 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    owner: "{{ mariadb_user }}"
-    group: "{{ mariadb_group }}"
+    owner: "{{ mariadb_file_owner }}"
+    group: "{{ mariadb_file_owner_group }}"
   with_items:
     - { src: 'templates/mysql/innodb.cnf', dest: '/etc/mysql/conf.d/innodb.cnf' }
   notify:
     - restart mysql
+
+- name: MariaDB | listen on all interfaces
+  lineinfile:
+    path: "/etc/mysql/mariadb.conf.d/50-server.cnf"
+    regexp: "^bind-address"
+    line: "#bind-address = 127.0.0.1"
+    state: present
 
 - name: MariaDB | Setup MariaDB root password
   mysql_user:
@@ -33,24 +40,22 @@
     - 127.0.0.1
     - ::1
     - localhost
-  notify:
-    - restart mysql
 
-- name: MariaDB | Setup MariaDB root password
+- name: MariaDB | Setup MariaDB {{ home_username }} user
   mysql_user:
     name: "{{ home_username }}"
     password: "{{ home_username }}"
-    host: "{{ item }}"
     priv: '*.*:ALL,GRANT'
+    host: "{{ item }}"
     state: present
   with_items:
+    - "%"
     - "{{ ansible_hostname }}"
     - 127.0.0.1
     - ::1
     - localhost
   notify:
     - restart mysql
-
 
 - name: MariaDB | Setup MariaDB creds for root user
   template:
@@ -66,16 +71,12 @@
     owner: "ubuntu"
     mode: 0600
 
+# Removes all anonymous user accounts
 - name: MariaDB | Delete blank MariaDB users
   mysql_user:
-    name: ""
-    host: "{{ item }}"
+    name: ''
+    host_all: yes
     state: absent
-  with_items:
-    - "{{ ansible_hostname }}"
-    - 127.0.0.1
-    - ::1
-    - localhost
 
 - name: MariaDB | Drop MariaDB test database
   mysql_db:

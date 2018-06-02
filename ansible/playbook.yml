@@ -7,8 +7,8 @@
   vars:
     samba_user: ubuntu
     samba_pass: ubuntu
-    mariadb_user: root
-    mariadb_group: root
+    mariadb_file_owner: root
+    mariadb_file_owner_group: root
     postgres_version: "9.5"
     postgres_user: ubuntu
     postgres_pass: ubuntu

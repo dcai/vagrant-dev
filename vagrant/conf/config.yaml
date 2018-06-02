@@ -10,12 +10,12 @@ vm:
       vm_mount_point: '/vagrant'
       type: ''
     src:
-      host_dir: '../../src'
+      host_dir: '../src'
       vm_mount_point: '/var/hostsrc'
       type: ''
     dropbox:
       owner: 'ubuntu'
       group: 'ubuntu'
-      host_dir: '../../Dropbox/'
+      host_dir: '../Dropbox/'
       vm_mount_point: '/home/ubuntu/Dropbox'
       type: ''

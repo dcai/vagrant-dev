@@ -34,7 +34,9 @@ Vagrant.configure('2') do |config|
   # end
 
   ports = (3000..3020).to_a
-  ports.push(5432, 8000, 8080)
+  ports.push(3306) # mysql
+  ports.push(5432) # postgres
+  ports.push(8000, 8080) # common http
   ports.each do |port|
     config.vm.network :forwarded_port, guest: port, host: port
   end
@@ -52,9 +54,11 @@ Vagrant.configure('2') do |config|
     v.gui = GUI_ENABLED
 
     SYNCED_FOLDER['vm']['shares'].each_pair do |_share, share_conf|
-      config.vm.synced_folder share_conf['host_dir'],
-                              share_conf['vm_mount_point'],
-                              type: share_conf['type']
+      if File.exist?(share_conf['host_dir'])
+        config.vm.synced_folder share_conf['host_dir'],
+                                share_conf['vm_mount_point'],
+                                type: share_conf['type']
+      end
     end
   end
 
