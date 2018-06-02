@@ -34,7 +34,7 @@ Vagrant.configure('2') do |config|
   # end
 
   ports = (3000..3020).to_a
-  ports.push(8000, 8080)
+  ports.push(5432, 8000, 8080)
   ports.each do |port|
     config.vm.network :forwarded_port, guest: port, host: port
   end

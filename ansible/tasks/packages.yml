@@ -2,7 +2,13 @@
 - name: Ubuntu | Add newer ppa vim source
   apt_repository:
     repo: ppa:jonathonf/vim
-- name: Ubuntu | Install packages
+
+- name: Ubuntu | Make sure vim is latest
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - vim
+
+- name: Ubuntu | Install missing packages
   apt: name={{ item }} state=present update_cache=yes
   with_items:
     - aptitude
@@ -25,5 +31,4 @@
     - tree
     - unrar
     - unzip
-    - vim
     - xz-utils

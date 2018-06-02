@@ -6,7 +6,7 @@
     mysql-client
 
 - name: MariaDB | Install MariadB Server
-  apt: pkg={{ item }} state=latest
+  apt: pkg={{ item }} state=present
   with_items:
     - mariadb-server-10.0
     - python-mysqldb

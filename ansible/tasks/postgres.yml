@@ -1,0 +1,40 @@
+---
+- name: Postgres | Install
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+    - "postgresql-{{ postgres_version }}"
+    - python-psycopg2
+
+- name: Postgres | Add user
+  become: yes
+  become_user: postgres
+  postgresql_user:
+    name: "{{ postgres_user }}"
+    password: "{{ postgres_pass }}"
+    role_attr_flags: CREATEDB,SUPERUSER,CREATEROLE,LOGIN
+
+- name: Postgres | Ensure postgres privs
+  become: yes
+  become_user: postgres
+  postgresql_privs:
+    db: postgres
+    roles: "{{ postgres_user }}"
+    objs: ALL_IN_SCHEMA
+    privs: SELECT,INSERT,UPDATE,DELETE
+
+- name: Postgres | change listen_addresses to '*'
+  lineinfile:
+    path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+    regexp: "^#listen_addresses"
+    line: "listen_addresses = '*'"
+    state: present
+
+- name: Postgres | change listen_addresses to '*'
+  lineinfile:
+    state: present
+    path: "/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf"
+    line: 'host    all             all             0.0.0.0/0               trust'
+  notify:
+    - restart postgresql
+
+
