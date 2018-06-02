@@ -4,6 +4,7 @@ require 'yaml'
 ## Change working directory to the location of Vagrantfile
 Dir.chdir(File.dirname(__FILE__))
 
+GUI_ENABLED = false
 if ARGV.include?('--gui')
   ARGV.delete('--gui')
   GUI_ENABLED = true
@@ -48,7 +49,7 @@ Vagrant.configure('2') do |config|
     # vb.gui = true
     # Customize the amount of memory on the VM:
     v.memory = '4096'
-    v.gui = GUI_ENABLED ||= false
+    v.gui = GUI_ENABLED
 
     SYNCED_FOLDER['vm']['shares'].each_pair do |_share, share_conf|
       config.vm.synced_folder share_conf['host_dir'],
