@@ -1,4 +1,7 @@
 ---
+- name: Ubuntu | Add newer ppa vim source
+  apt_repository:
+    repo: ppa:jonathonf/vim
 - name: Ubuntu | Install packages
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
