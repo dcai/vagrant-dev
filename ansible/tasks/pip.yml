@@ -4,6 +4,8 @@
     - pip
 
 - name: Pip | install packages
+  become: yes
+  become_user: "{{ home_username }}"
   pip: name={{ item }}  state=present extra_args="--user --upgrade"
   with_items:
     - tmuxp
