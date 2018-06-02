@@ -3,18 +3,20 @@
   apt_repository:
     repo: ppa:jonathonf/vim
 - name: Ubuntu | Install packages
-  apt: name={{ item }} state=latest update_cache=yes
+  apt: name={{ item }} state=present update_cache=yes
   with_items:
     - aptitude
     - aria2
     - cmake
     - git
     - htop
+    - jq
     - mariadb-client-10.0
     - mcrypt
     - memcached
     - mosh
     - python-pip
+    - python3-pip
     - ruby
     - silversearcher-ag
     - software-properties-common
