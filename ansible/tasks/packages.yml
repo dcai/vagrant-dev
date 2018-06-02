@@ -21,6 +21,7 @@
     - mcrypt
     - memcached
     - mosh
+    - ncdu
     - python-pip
     - python3-pip
     - ruby
