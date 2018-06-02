@@ -1,10 +1,10 @@
 ---
 vm:
   shares:
-    code:
-      host_dir: './code'
-      vm_mount_point: '/var/www'
-      type: 'nfs_guest'
+    # code:
+      # host_dir: './code'
+      # vm_mount_point: '/var/www'
+      # type: 'nfs_guest'
     vagrant:
       host_dir: '.'
       vm_mount_point: '/vagrant'
