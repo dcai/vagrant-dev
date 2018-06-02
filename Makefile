@@ -1,7 +1,7 @@
 all:
 	echo "vagrant up"
 
-install-plugins:
+install-vg-plugins:
 	echo "=> Install vagrant proxy conf plugin"
 	vagrant plugin install vagrant-proxyconf
 	echo "=> Install vagrant disksize plugin"

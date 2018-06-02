@@ -21,6 +21,25 @@ Vagrant.configure('2') do |config|
   config.vm.box = 'ubuntu/bionic64'
   config.disksize.size = '100GB' if Vagrant.has_plugin?('vagrant-disksize')
   config.vm.box_check_update = false
+  ## Proxy settings
+  if Vagrant.has_plugin?('vagrant-proxyconf')
+    westpac_proxy = 'http://proxy.stgeorge.com.au:8080'
+    # config.proxy.http = westpac_proxy
+    # config.proxy.https = westpac_proxy
+    # hostnames = [
+    #   '127.0.0.1',
+    #   'localhost',
+    #   'artifactory.srv.westpac.com.au',
+    #   'bitbucket.srv.westpac.com.au',
+    #   'gw-public.dev1.api.srv.westpac.com.au'
+    # ]
+    # ipaas_envs = %w[dev1 sit1 esit1 idev2 uat2 svp1]
+    # config.proxy.no_proxy = hostnames.concat(
+    #   ipaas_envs.collect { |x| "gw.#{x}.api.srv.westpac.com.au" }
+    # ).concat(
+    #   ipaas_envs.collect { |x| "gw.#{x}.api.westpac.com.au" }
+    # )
+  end
 
   config.vm.provider 'hyperv' do |h, hyperv_config|
     hyperv_config.vm.box = 'generic/ubuntu1604'
