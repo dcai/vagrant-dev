@@ -1,11 +1,15 @@
 ---
 - name: Ubuntu | Add newer ppa vim source
   apt_repository:
-    repo: ppa:jonathonf/vim
+    repo: "{{ item }}"
+  with_items:
+    - ppa:jonathonf/vim
+    - ppa:fish-shell/release-2
 
 - name: Ubuntu | Make sure vim is latest
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
+    - fish
     - vim
 
 - name: Ubuntu | Install missing packages

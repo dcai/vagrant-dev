@@ -10,9 +10,10 @@ if ARGV.include?('--gui')
   GUI_ENABLED = true
 end
 
-SYNCED_FOLDER = YAML.load_file 'vagrant/conf/config.yaml'
 if Vagrant::Util::Platform.windows?
   SYNCED_FOLDER = YAML.load_file 'vagrant/conf/config-win.yaml'
+else
+  SYNCED_FOLDER = YAML.load_file 'vagrant/conf/config.yaml'
 end
 
 Vagrant.configure('2') do |config|
