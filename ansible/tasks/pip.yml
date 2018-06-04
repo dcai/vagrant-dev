@@ -2,6 +2,7 @@
   pip: name={{ item }}  state=present extra_args="--upgrade"
   with_items:
     - pip
+    - ps_mem
 
 - name: Pip | install packages
   become: yes
