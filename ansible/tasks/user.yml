@@ -39,6 +39,13 @@
     dest: "{{ home_dir }}/.fzf"
     depth: 1
 
+- name: $HOME | change .fzf directory ownership
+  file:
+    path: "{{ home_dir }}/.fzf"
+    owner: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
+    mode: 0775
+
 - name: $HOME | download .tmux.conf
   get_url:
     url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/9295d4db1781be6b8f7852fab68cae0c63831ab9/.tmux.conf
