@@ -3,24 +3,24 @@
   become: True
   become_method: sudo
   become_user: root
-  remote_user: ubuntu
+  remote_user: vagrant
   vars:
-    samba_user: ubuntu
-    samba_pass: ubuntu
+    samba_user: vagrant
+    samba_pass: vagrant
     mariadb_version: "10.0"
     mariadb_file_owner: root
     mariadb_file_owner_group: root
     postgres_version: "9.5"
-    postgres_user: ubuntu
-    postgres_pass: ubuntu
+    postgres_user: vagrant
+    postgres_pass: vagrant
     httpd_wwwroot: "/var/www"
-    httpd_user: ubuntu
-    httpd_group: ubuntu
+    httpd_user: vagrant
+    httpd_group: vagrant
     php_version: "5.6"
     nodejs_version: "8.x"
-    home_dir: "/home/ubuntu"
-    home_username: ubuntu
-    home_usergroup: ubuntu
+    home_dir: "/home/vagrant"
+    home_username: vagrant
+    home_usergroup: vagrant
     phpmyadmin_version: "4.8.1"
   tasks:
     - name: set timezone to Etc/UTC

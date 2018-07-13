@@ -68,7 +68,7 @@
   template:
     src: templates/mysql/my.ubuntu.cnf
     dest: "{{ home_dir }}/.my.cnf"
-    owner: "ubuntu"
+    owner: "{{ home_username }}"
     mode: 0600
 
 # Removes all anonymous user accounts
