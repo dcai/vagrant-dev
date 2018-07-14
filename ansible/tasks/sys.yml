@@ -16,9 +16,15 @@
     fstype: ext4
     dev: "{{ extra_hdd }}"
 
-- name: Mount up device
+- name:  "/workspace | mount"
   mount:
     path: "{{ extra_hdd_mount }}"
     src: "{{ extra_hdd }}"
     fstype: ext4
     state: mounted
+
+- name: "/workspace | change ownership"
+  file:
+    path: /workspace
+    owner: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
