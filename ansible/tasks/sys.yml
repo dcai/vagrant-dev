@@ -4,3 +4,21 @@
     name: fs.inotify.max_user_watches
     value: 524288
     state: present
+
+- name: "Parted | create a new partition"
+  parted:
+    device: "{{ extra_hdd }}"
+    number: 1
+    state: present
+
+- name: "filesystem | create ext4"
+  filesystem:
+    fstype: ext4
+    dev: "{{ extra_hdd }}"
+
+- name: Mount up device
+  mount:
+    path: "{{ extra_hdd_mount }}"
+    src: "{{ extra_hdd }}"
+    fstype: ext4
+    state: mounted

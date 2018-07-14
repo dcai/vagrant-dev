@@ -1,0 +1,13 @@
+---
+vm:
+  shares:
+    vagrant:
+      host_dir: '.'
+      vm_mount_point: '/vagrant'
+      type: ''
+    dropbox:
+      owner: 'ubuntu'
+      group: 'ubuntu'
+      host_dir: 'C:\Users\dcai\Dropbox'
+      vm_mount_point: '/home/ubuntu/Dropbox'
+      type: ''

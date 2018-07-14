@@ -8,14 +8,12 @@ vm:
     vagrant:
       host_dir: '.'
       vm_mount_point: '/vagrant'
-      type: ''
-    src:
-      host_dir: '../src'
-      vm_mount_point: '/var/hostsrc'
+      owner: 'ubuntu'
+      group: 'ubuntu'
       type: ''
     dropbox:
-      owner: 'vagrant'
-      group: 'vagrant'
+      owner: 'ubuntu'
+      group: 'ubuntu'
       host_dir: '../Dropbox/'
-      vm_mount_point: '/home/vagrant/Dropbox'
+      vm_mount_point: '/home/ubuntu/Dropbox'
       type: ''

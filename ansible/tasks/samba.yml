@@ -9,8 +9,13 @@
     path: /etc/samba/smb.conf
     block: |
       [home]
-        comment = vagrant home export
+        comment = home export
         path = {{ home_dir }}
+        read only = no
+        browsable = yes
+      [workspace]
+        comment = workspace
+        path = {{ extra_hdd_mount }}
         read only = no
         browsable = yes
   notify:

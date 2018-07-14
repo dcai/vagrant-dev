@@ -30,6 +30,7 @@
     mode: 0775
     content: |
       session_name: dev
+      start_directory: '~'
       windows:
       - window_name: dev
         layout: tiled

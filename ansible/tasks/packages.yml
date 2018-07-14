@@ -6,34 +6,39 @@
     - ppa:jonathonf/vim
     - ppa:fish-shell/release-2
 
-- name: Ubuntu | Make sure vim is latest
+- name: Ubuntu | Make sure vim and fish are latest
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
     - fish
     - vim
 
-- name: Ubuntu | Install missing packages
-  apt: name={{ item }} state=present update_cache=yes
-  with_items:
-    - aptitude
-    - aria2
-    - cmake
-    - git
-    - htop
-    - jq
-    - "mariadb-client-{{ mariadb_version }}"
-    - mcrypt
-    - memcached
-    - mosh
-    - ncdu
-    - python-pip
-    - python3-pip
-    - ruby
-    - silversearcher-ag
-    - software-properties-common
-    - tig
-    - tmux
-    - tree
-    - unrar
-    - unzip
-    - xz-utils
+- name: Ubuntu | Install packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+      - aptitude
+      - aria2
+      - cmake
+      - git
+      - htop
+      - jq
+      - "mariadb-client-{{ mariadb_version }}"
+      - mcrypt
+      - memcached
+      - mosh
+      - ncdu
+      - p7zip
+      - python-pip
+      - python3-pip
+      - ruby
+      - silversearcher-ag
+      - software-properties-common
+      - tig
+      - tmux
+      - tree
+      - unrar
+      - unzip
+      - xz-utils

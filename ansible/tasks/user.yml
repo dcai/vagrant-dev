@@ -1,5 +1,26 @@
 ---
-- name: $HOME | Cleanup
+
+- name: USER | Create 'admin' group
+  group:
+    name: admin
+    state: present
+
+- name: USER | Allow 'admin' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%admin'
+    line: '%admin ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: "USER | Edit user: {{ home_username }}"
+  user:
+    name: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
+    groups: sudo,admin
+    append: yes
+
+- name: USER | Cleanup existing config files
   file:
     src: "{{ item.src | default(omit) }}"
     dest: "{{ item.dest }}"
@@ -9,7 +30,7 @@
     - { dest: '{{ home_dir }}/.vimrc', state: 'absent' }
     - { dest: '{{ home_dir }}/.tmux.conf', state: 'absent' }
 
-- name: $HOME | Create .local
+- name: USER | Create `.local/bin` directory
   file:
     path: "{{ home_dir }}/.local/bin"
     state: directory
@@ -17,7 +38,7 @@
     group: "{{ home_usergroup }}"
     mode: 0775
 
-- name: $HOME | download .vimrc
+- name: USER | download .vimrc
   get_url:
     url: https://gist.githubusercontent.com/dcai/cd2b8102218eb8381e6a1aacc80a0cb0/raw/bf29d1b68410a0f902bace6b51a9900119a67a90/.vimrc
     dest: "{{ home_dir }}/.vimrc"
@@ -25,7 +46,7 @@
     group: "{{ home_usergroup }}"
     mode: 0640
 
-- name: $HOME | download .bashrc
+- name: USER | download .bashrc
   get_url:
     url: https://gist.githubusercontent.com/dcai/3847582/raw/df5748e8294c512c07aa28c390e6b4e339de3f5f/.bashrc
     dest: "{{ home_dir }}/.bashrc"
@@ -33,20 +54,20 @@
     group: "{{ home_usergroup }}"
     mode: 0640
 
-- name: $HOME | install fzf
+- name: USER | install fzf
   git:
     repo: https://github.com/junegunn/fzf.git
     dest: "{{ home_dir }}/.fzf"
     depth: 1
 
-- name: $HOME | change .fzf directory ownership
+- name: USER | change .fzf directory ownership
   file:
     path: "{{ home_dir }}/.fzf"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
     mode: 0775
 
-- name: $HOME | download .tmux.conf
+- name: USER | download .tmux.conf
   get_url:
     url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/9295d4db1781be6b8f7852fab68cae0c63831ab9/.tmux.conf
     dest: "{{ home_dir }}/.tmux.conf"
