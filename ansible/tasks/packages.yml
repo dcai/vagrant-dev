@@ -40,6 +40,7 @@
       - python-pip
       - python3-pip
       - ruby
+      - ruby-dev
       - silversearcher-ag
       - software-properties-common
       - tig
