@@ -5,6 +5,20 @@
     name: admin
     state: present
 
+- name: "USER | Create {{ home_usergroup }} group"
+  group:
+    name: "{{ home_usergroup }}"
+    state: present
+
+- name: "USER | Edit user: {{ home_username }}"
+  user:
+    name: "{{ home_username }}"
+    password: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
+    groups: sudo,admin
+    append: yes
+    state: present
+
 - name: USER | Allow 'admin' group to have passwordless sudo
   lineinfile:
     dest: /etc/sudoers
@@ -12,13 +26,6 @@
     regexp: '^%admin'
     line: '%admin ALL=(ALL) NOPASSWD: ALL'
     validate: 'visudo -cf %s'
-
-- name: "USER | Edit user: {{ home_username }}"
-  user:
-    name: "{{ home_username }}"
-    group: "{{ home_usergroup }}"
-    groups: sudo,admin
-    append: yes
 
 - name: USER | Cleanup existing config files
   file:
