@@ -1,16 +1,18 @@
 ---
-- name: Ubuntu | Add newer ppa vim source
+- name: Ubuntu | Add ppa source
   apt_repository:
     repo: "{{ item }}"
   with_items:
     - ppa:jonathonf/vim
     - ppa:fish-shell/release-2
+    - ppa:git-core/ppa
 
-- name: Ubuntu | Make sure vim and fish are latest
+- name: Ubuntu | Make sure vim/fish/git are latest
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
     - fish
     - vim
+    - git
 
 - name: "Ubuntu | Install ripgrep {{version}}"
   apt:
