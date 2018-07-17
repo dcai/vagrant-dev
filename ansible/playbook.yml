@@ -30,14 +30,14 @@
         name: Etc/UTC
     - include: tasks/packages.yml
     - include: tasks/user.yml
-    - include: tasks/sys.yml
     - include: tasks/nodejs.yml
     - include: tasks/pip.yml
     - include: tasks/samba.yml
-    - include: tasks/mysql.yml
-    - include: tasks/postgres.yml
+    # - include: tasks/mysql.yml
+    # - include: tasks/postgres.yml
     # - include: tasks/php.yml
     # - include: tasks/nginx.yml
+    - include: tasks/sys.yml
 
   handlers:
     - name: restart nginx

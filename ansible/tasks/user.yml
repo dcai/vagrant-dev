@@ -61,6 +61,30 @@
     group: "{{ home_usergroup }}"
     mode: 0640
 
+- name: USER | download .tmux.conf
+  get_url:
+    url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/9295d4db1781be6b8f7852fab68cae0c63831ab9/.tmux.conf
+    dest: "{{ home_dir }}/.tmux.conf"
+    owner: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
+    mode: 0640
+
+- name: USER | download .gitconfig
+  get_url:
+    url: https://gist.githubusercontent.com/dcai/2030ba4091ae888aa0e023c2e2018554/raw/06a6d3990a708b628285bf0a811435c6b3660696/.gitconfig
+    dest: "{{ home_dir }}/.gitconfig"
+    owner: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
+    mode: 0640
+
+- name: USER | .gitconfig.local
+  blockinfile:
+    path: "{{ home_dir }}/.gitconfig.local"
+    block: |
+      [user]
+        name = Dongsheng Cai
+        email = d@tux.im
+
 - name: USER | install fzf
   git:
     repo: https://github.com/junegunn/fzf.git
@@ -73,11 +97,3 @@
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
     mode: 0775
-
-- name: USER | download .tmux.conf
-  get_url:
-    url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/9295d4db1781be6b8f7852fab68cae0c63831ab9/.tmux.conf
-    dest: "{{ home_dir }}/.tmux.conf"
-    owner: "{{ home_username }}"
-    group: "{{ home_usergroup }}"
-    mode: 0640
