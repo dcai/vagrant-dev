@@ -79,6 +79,7 @@
 
 - name: USER | .gitconfig.local
   blockinfile:
+    create: yes
     path: "{{ home_dir }}/.gitconfig.local"
     block: |
       [user]
