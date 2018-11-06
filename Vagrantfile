@@ -16,7 +16,7 @@ SYNCED_FOLDER = if Vagrant::Util::Platform.windows?
                 else
                   YAML.load_file 'conf/shares.yaml'
                 end
-
+RAM = '2048'
 Vagrant.configure('2') do |config|
   config.vm.box = 'ubuntu/xenial64'
   config.disksize.size = '100GB' if Vagrant.has_plugin?('vagrant-disksize')
@@ -25,7 +25,7 @@ Vagrant.configure('2') do |config|
   config.vm.provider 'hyperv' do |h, hyperv_config|
     hyperv_config.vm.box = 'generic/ubuntu1604'
     # h.enable_virtualization_extensions = true
-    h.memory = '4096'
+    h.memory = RAM
 
     hyperv_config.vm.synced_folder '.', '/vagrant',
                                    type: 'smb',
@@ -62,7 +62,7 @@ Vagrant.configure('2') do |config|
                  '--device', 0,
                  '--type', 'hdd',
                  '--medium', disk_file]
-    v.memory = '4096'
+    v.memory = RAM
     v.gui = GUI_ENABLED
   end
 
