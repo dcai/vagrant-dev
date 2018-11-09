@@ -62,6 +62,7 @@
 
 - name: phpMyAdmin | Download and unzip
   unarchive:
+    creates: /var/www
     owner: "{{ httpd_user }}"
     group: "{{ httpd_group }}"
     mode: 0775

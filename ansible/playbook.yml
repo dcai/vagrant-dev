@@ -34,9 +34,9 @@
     - include: tasks/pip.yml
     - include: tasks/samba.yml
     # - include: tasks/mysql.yml
-    # - include: tasks/postgres.yml
-    # - include: tasks/php.yml
-    # - include: tasks/nginx.yml
+    - include: tasks/postgres.yml
+    - include: tasks/php.yml
+    - include: tasks/nginx.yml
     - include: tasks/sys.yml
 
   handlers:

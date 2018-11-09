@@ -16,7 +16,7 @@ SYNCED_FOLDER = if Vagrant::Util::Platform.windows?
                 else
                   YAML.load_file 'conf/shares.yaml'
                 end
-RAM = '2048'
+RAM = '6144'
 Vagrant.configure('2') do |config|
   config.vm.box = 'ubuntu/xenial64'
   config.disksize.size = '100GB' if Vagrant.has_plugin?('vagrant-disksize')
