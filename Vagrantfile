@@ -34,7 +34,7 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.provider 'virtualbox' do |v, vbox_config|
-    vbox_config.vm.network 'private_network', ip: '172.16.0.2'
+    vbox_config.vm.network 'public_network', ip: '172.16.0.2'
     ports = (3000..3020).to_a
     ports.push(3306) # mysql
     ports.push(5432) # postgres
