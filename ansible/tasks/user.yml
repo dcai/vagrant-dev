@@ -1,5 +1,3 @@
----
-
 - name: USER | Create 'admin' group
   group:
     name: admin
@@ -23,9 +21,9 @@
   lineinfile:
     dest: /etc/sudoers
     state: present
-    regexp: '^%admin'
-    line: '%admin ALL=(ALL) NOPASSWD: ALL'
-    validate: 'visudo -cf %s'
+    regexp: "^%admin"
+    line: "%admin ALL=(ALL) NOPASSWD: ALL"
+    validate: "visudo -cf %s"
 
 - name: USER | Cleanup existing config files
   file:
@@ -33,9 +31,9 @@
     dest: "{{ item.dest }}"
     state: "{{ item.state }}"
   with_items:
-    - { dest: '{{ home_dir }}/.bashrc', state: 'absent' }
-    - { dest: '{{ home_dir }}/.vimrc', state: 'absent' }
-    - { dest: '{{ home_dir }}/.tmux.conf', state: 'absent' }
+    - { dest: "{{ home_dir }}/.bashrc", state: "absent" }
+    - { dest: "{{ home_dir }}/.vimrc", state: "absent" }
+    - { dest: "{{ home_dir }}/.tmux.conf", state: "absent" }
 
 - name: USER | Create `.local/bin` directory
   file:

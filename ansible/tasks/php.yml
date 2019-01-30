@@ -1,4 +1,3 @@
----
 - name: PHP | Install Ondrej PHP PPA
   apt_repository: repo='ppa:ondrej/php' update_cache=yes
 
@@ -33,16 +32,28 @@
     owner: "{{ httpd_user }}"
     group: "{{ httpd_group }}"
   with_items:
-    - { src: 'templates/php{{ php_version }}.ini', dest: '/etc/php/{{ php_version }}/fpm/php.ini' }
-    - { src: 'templates/opcache.ini', dest: '/etc/php/{{ php_version }}/mods-available/opcache.ini' }
-    - { src: 'templates/xdebug.ini', dest: '/etc/php/{{ php_version }}/mods-available/xdebug.ini' }
-    - { src: 'templates/php-fpm-www{{ php_version }}.conf', dest: '/etc/php/{{ php_version }}/fpm/pool.d/www.conf' }
+    - {
+        src: "templates/php{{ php_version }}.ini",
+        dest: "/etc/php/{{ php_version }}/fpm/php.ini",
+      }
+    - {
+        src: "templates/opcache.ini",
+        dest: "/etc/php/{{ php_version }}/mods-available/opcache.ini",
+      }
+    - {
+        src: "templates/xdebug.ini",
+        dest: "/etc/php/{{ php_version }}/mods-available/xdebug.ini",
+      }
+    - {
+        src: "templates/php-fpm-www{{ php_version }}.conf",
+        dest: "/etc/php/{{ php_version }}/fpm/pool.d/www.conf",
+      }
   notify:
     - restart php-fpm
 # - name: Set up XDebug for remote debugging
-  # template:
-    # src:  templates/xdebug.ini
-    # dest: /etc/php/{{ php_version }}/apache2/conf.d/xdebug-remote-debugging.ini
+# template:
+# src:  templates/xdebug.ini
+# dest: /etc/php/{{ php_version }}/apache2/conf.d/xdebug-remote-debugging.ini
 
 - stat: path=/usr/local/bin/composer
   register: composer_folder
@@ -53,7 +64,7 @@
 
 - name: phpMyAdmin | Purge directory
   file:
-    path: '/var/www/{{ item }}'
+    path: "/var/www/{{ item }}"
     state: absent
   with_items:
     - "phpmyadmin"

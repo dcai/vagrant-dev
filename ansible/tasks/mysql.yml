@@ -1,8 +1,6 @@
----
 - name: MySQL | Uninstall
   apt: name={{item}} state=absent
-  with_items:
-    mysql-server
+  with_items: mysql-server
     mysql-client
 
 - name: MariaDB | Install MariadB Server
@@ -18,7 +16,10 @@
     owner: "{{ mariadb_file_owner }}"
     group: "{{ mariadb_file_owner_group }}"
   with_items:
-    - { src: 'templates/mysql/innodb.cnf', dest: '/etc/mysql/conf.d/innodb.cnf' }
+    - {
+        src: "templates/mysql/innodb.cnf",
+        dest: "/etc/mysql/conf.d/innodb.cnf",
+      }
   notify:
     - restart mysql
 
@@ -45,7 +46,7 @@
   mysql_user:
     name: "{{ home_username }}"
     password: "{{ home_username }}"
-    priv: '*.*:ALL,GRANT'
+    priv: "*.*:ALL,GRANT"
     host: "{{ item }}"
     state: present
   with_items:
@@ -74,7 +75,7 @@
 # Removes all anonymous user accounts
 - name: MariaDB | Delete blank MariaDB users
   mysql_user:
-    name: ''
+    name: ""
     host_all: yes
     state: absent
 

@@ -1,4 +1,3 @@
----
 - name: NodeJS | Check if is present
   command: test -x /usr/bin/node
   when: ansible_system == "Linux"

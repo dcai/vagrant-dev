@@ -1,4 +1,3 @@
----
 - name: sysctl | fs.inotify.max_user_watches
   sysctl:
     name: fs.inotify.max_user_watches
@@ -16,7 +15,7 @@
     fstype: ext4
     dev: "{{ extra_hdd }}"
 
-- name:  "/workspace | mount"
+- name: "/workspace | mount"
   mount:
     path: "{{ extra_hdd_mount }}"
     src: "{{ extra_hdd }}"

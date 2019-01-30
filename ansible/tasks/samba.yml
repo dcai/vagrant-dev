@@ -1,4 +1,3 @@
----
 - name: Samba | Install Samba
   apt: pkg={{ item }} state=latest
   with_items:

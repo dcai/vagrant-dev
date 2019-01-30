@@ -1,4 +1,3 @@
----
 - name: Postgres | Install
   apt: name={{ item }} state=present update_cache=yes
   with_items:
@@ -33,8 +32,6 @@
   lineinfile:
     state: present
     path: "/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf"
-    line: 'host    all             all             0.0.0.0/0               trust'
+    line: "host    all             all             0.0.0.0/0               trust"
   notify:
     - restart postgresql
-
-
