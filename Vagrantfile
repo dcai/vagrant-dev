@@ -18,7 +18,7 @@ SYNCED_FOLDER = if Vagrant::Util::Platform.windows?
                 end
 RAM = '6144'
 Vagrant.configure('2') do |config|
-  config.vm.box = 'ubuntu/xenial64'
+  config.vm.box = "ubuntu/bionic64"
   config.disksize.size = '100GB' if Vagrant.has_plugin?('vagrant-disksize')
   config.vm.box_check_update = false
 
