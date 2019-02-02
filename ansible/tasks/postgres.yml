@@ -1,8 +1,8 @@
 - name: Postgres | Install
-  apt: name={{ item }} state=present update_cache=yes
-  with_items:
-    - "postgresql-{{ postgres_version }}"
-    - python-psycopg2
+  apt:
+    state: present
+    update_cache: yes
+    pkg: ["postgresql-{{ postgres_version }}", python-psycopg2]
 
 - name: Postgres | Add user
   become: yes

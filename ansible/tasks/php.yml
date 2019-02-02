@@ -2,28 +2,31 @@
   apt_repository: repo='ppa:ondrej/php' update_cache=yes
 
 - name: PHP | Install PHP and its modules
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - php{{ php_version }}
-    - php{{ php_version }}-fpm
-    - php{{ php_version }}-cli
-    - php{{ php_version }}-intl
-    - php{{ php_version }}-curl
-    - php{{ php_version }}-gd
-    - php{{ php_version }}-imagick
-    - php{{ php_version }}-mysql
-    - php{{ php_version }}-xml
-    - php{{ php_version }}-xmlrpc
-    - php{{ php_version }}-soap
-    - php{{ php_version }}-mbstring
-    - php{{ php_version }}-zip
-    - php{{ php_version }}-xdebug
-    - php{{ php_version }}-opcache
+  apt:
+    state: latest
+    pkg:
+      [
+        "php{{ php_version }}",
+        "php{{ php_version }}-fpm",
+        "php{{ php_version }}-cli",
+        "php{{ php_version }}-intl",
+        "php{{ php_version }}-curl",
+        "php{{ php_version }}-gd",
+        "php{{ php_version }}-imagick",
+        "php{{ php_version }}-mysql",
+        "php{{ php_version }}-xml",
+        "php{{ php_version }}-xmlrpc",
+        "php{{ php_version }}-soap",
+        "php{{ php_version }}-mbstring",
+        "php{{ php_version }}-zip",
+        "php{{ php_version }}-xdebug",
+        "php{{ php_version }}-opcache",
+      ]
 
 - name: PHP | Install PHP memcached and redis ext
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - php-memcached
+  apt:
+    pkg: [php-memcached]
+    state: latest
 
 - name: PHP-FPM | Copy config
   template:
@@ -62,6 +65,11 @@
   shell: curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer
   when: composer_folder.stat.isdir is not defined
 
+- name: create /var/www
+  file:
+    path: /var/www
+    state: directory
+
 - name: phpMyAdmin | Purge directory
   file:
     path: "/var/www/{{ item }}"
@@ -73,7 +81,6 @@
 
 - name: phpMyAdmin | Download and unzip
   unarchive:
-    creates: /var/www
     owner: "{{ httpd_user }}"
     group: "{{ httpd_group }}"
     mode: 0775

@@ -1,4 +1,3 @@
----
 vm:
   shares:
     # code:
@@ -6,14 +5,14 @@ vm:
     #   vm_mount_point: '/var/www'
     #   type: 'nfs_guest'
     vagrant:
-      host_dir: '.'
-      vm_mount_point: '/vagrant'
-      owner: 'ubuntu'
-      group: 'ubuntu'
-      type: ''
+      host_dir: "."
+      vm_mount_point: "/vagrant"
+      owner: "{{ home_username }}"
+      group: "{{ home_username }}"
+      type: ""
     dropbox:
-      owner: 'ubuntu'
-      group: 'ubuntu'
-      host_dir: '../Dropbox/'
-      vm_mount_point: '/home/ubuntu/Dropbox'
-      type: ''
+      owner: "{{ home_username }}"
+      group: "{{ home_username }}"
+      host_dir: "../Dropbox/"
+      vm_mount_point: "/home/ubuntu/Dropbox"
+      type: ""

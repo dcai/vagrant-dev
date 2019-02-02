@@ -1,0 +1,23 @@
+- name: "Parted | create a new partition"
+  parted:
+    device: "{{ extra_hdd }}"
+    number: 1
+    state: present
+
+- name: "filesystem | create ext4"
+  filesystem:
+    fstype: ext4
+    dev: "{{ extra_hdd }}"
+
+- name: "/workspace | mount"
+  mount:
+    path: "{{ extra_hdd_mount }}"
+    src: "{{ extra_hdd }}"
+    fstype: ext4
+    state: mounted
+
+- name: "/workspace | change ownership"
+  file:
+    path: /workspace
+    owner: "{{ home_username }}"
+    group: "{{ home_usergroup }}"

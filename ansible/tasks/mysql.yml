@@ -1,13 +1,12 @@
 - name: MySQL | Uninstall
-  apt: name={{item}} state=absent
-  with_items: mysql-server
-    mysql-client
+  apt:
+    state: absent
+    pkg: [mysql-server, mysql-client]
 
 - name: MariaDB | Install MariadB Server
-  apt: pkg={{ item }} state=present
-  with_items:
-    - "mariadb-server-{{ mariadb_version }}"
-    - python-mysqldb
+  apt:
+    state: present
+    pkg: ["mariadb-server-{{ mariadb_version }}", python-mysqldb]
 
 - name: MariaDB | innodb settings
   template:

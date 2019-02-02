@@ -7,11 +7,10 @@
     - ppa:git-core/ppa
 
 - name: Ubuntu | Make sure vim/fish/git are latest
-  apt: name={{ item }} state=latest update_cache=yes
-  with_items:
-    - fish
-    - vim
-    - git
+  apt:
+    state: latest
+    update_cache: yes
+    pkg: [fish, vim, git]
 
 - name: "Ubuntu | Install ripgrep {{version}}"
   apt:
@@ -21,31 +20,30 @@
 
 - name: Ubuntu | Install packages
   apt:
-    name: "{{ packages }}"
     state: present
-    update_cache: yes
-  vars:
-    packages:
-      - aptitude
-      - aria2
-      - cmake
-      - htop
-      - jq
-      - "mariadb-client-{{ mariadb_version }}"
-      - mcrypt
-      - memcached
-      - mosh
-      - ncdu
-      - p7zip
-      - python-pip
-      - python3-pip
-      - ruby
-      - ruby-dev
-      - silversearcher-ag
-      - software-properties-common
-      - tig
-      - tmux
-      - tree
-      - unrar
-      - unzip
-      - xz-utils
+    pkg:
+      [
+        aptitude,
+        aria2,
+        cmake,
+        htop,
+        jq,
+        "mariadb-client-{{ mariadb_version }}",
+        mcrypt,
+        memcached,
+        mosh,
+        ncdu,
+        p7zip,
+        python-pip,
+        python3-pip,
+        ruby,
+        ruby-dev,
+        silversearcher-ag,
+        software-properties-common,
+        tig,
+        tmux,
+        tree,
+        unrar,
+        unzip,
+        xz-utils,
+      ]

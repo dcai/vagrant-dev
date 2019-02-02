@@ -1,18 +1,16 @@
 - name: Pip | Upgrade system pip packages
-  pip: name={{ item }}  state=present extra_args="--upgrade"
-  with_items:
-    - pip
-    - ps_mem
+  pip:
+    state: present
+    extra_args: "--upgrade"
+    name: [pip, ps_mem]
 
 - name: Pip | install packages
   become: yes
   become_user: "{{ home_username }}"
-  pip: name={{ item }}  state=present extra_args="--user --upgrade"
-  with_items:
-    - tmuxp
-    - pgcli
-    - mycli
-    - httpie
+  pip:
+    state: present
+    extra_args: "--user --upgrade"
+    name: [tmuxp, pgcli, mycli, httpie]
 
 - name: tmuxp | Create ~/.tmuxp
   file:
