@@ -29,8 +29,8 @@ Vagrant.configure('2') do |config|
 
     hyperv_config.vm.synced_folder '.', '/vagrant',
                                    type: 'smb',
-                                   smb_username: 'ubuntu',
-                                   smb_password: 'ubuntu'
+                                   smb_username: 'vagrant',
+                                   smb_password: 'vagrant'
   end
 
   config.vm.provider 'virtualbox' do |v, vbox_config|

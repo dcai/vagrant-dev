@@ -4,8 +4,8 @@
   become_user: root
   remote_user: ubuntu
   vars:
-    home_username: ubuntu
-    home_usergroup: ubuntu
+    home_username: vagrant
+    home_usergroup: vagrant
     home_dir: "/home/{{ home_username }}"
     extra_hdd: "/dev/sdc"
     extra_hdd_mount: "/workspace"

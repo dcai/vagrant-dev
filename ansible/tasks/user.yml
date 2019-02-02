@@ -43,17 +43,22 @@
     group: "{{ home_usergroup }}"
     mode: 0775
 
-- name: USER | download .vimrc
-  get_url:
-    url: https://gist.githubusercontent.com/dcai/cd2b8102218eb8381e6a1aacc80a0cb0/raw/bf29d1b68410a0f902bace6b51a9900119a67a90/.vimrc
-    dest: "{{ home_dir }}/.vimrc"
+- name: USER | .vim
+  git:
+    repo: https://github.com/dcai/.vim.git
+    dest: "{{ home_dir }}/.vim"
+    depth: 1
+
+- name: USER | .vim ownership
+  file:
+    path: "{{ home_dir }}/.vim"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
-    mode: 0640
+    mode: 0755
 
 - name: USER | download .bashrc
   get_url:
-    url: https://gist.githubusercontent.com/dcai/3847582/raw/df5748e8294c512c07aa28c390e6b4e339de3f5f/.bashrc
+    url: https://gist.githubusercontent.com/dcai/3847582/raw/4aa5d1f56963298e819c5d24bf8da13f2806e6d9/.bashrc
     dest: "{{ home_dir }}/.bashrc"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
