@@ -33,11 +33,15 @@
     - include: tasks/pip.yml
     - include: tasks/samba.yml
     - include: tasks/mysql.yml
+    - include: tasks/mongo.yml
     - include: tasks/postgres.yml
     - include: tasks/php.yml
     - include: tasks/nginx.yml
     - include: tasks/sys.yml
-    - include: tasks/partition.yml
+    # - include: tasks/partition.yml
+    - name: apt | refresh cache
+      apt: update_cache=yes
+      when: apt.changed
 
   handlers:
     - name: restart nginx
@@ -50,3 +54,5 @@
       service: name=smbd state=restarted
     - name: restart postgresql
       service: name=postgresql state=restarted
+    - name: restart mongodb
+      service: name=mongod state=restarted

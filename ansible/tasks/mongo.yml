@@ -1,0 +1,20 @@
+- name: mongodb | Add an apt key by id from a keyserver
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 9DA31620334BD75D9DCB49F368818C72E52529D4
+
+- name: mongodb | Add repositories
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - "deb https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/4.0 multiverse"
+  register: apt
+
+- name: mongodb | Install
+  apt:
+    name: mongodb-org
+    state: present
+    update_cache: yes
+  notify:
+    - restart mongodb

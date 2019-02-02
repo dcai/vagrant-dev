@@ -6,7 +6,7 @@
 - name: NGINX | Install
   apt:
     name: nginx
-    state: installed
+    state: present
     update_cache: yes
 
 - name: NGINX | Fix wwwroot permissions
