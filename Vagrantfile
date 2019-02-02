@@ -16,9 +16,9 @@ SYNCED_FOLDER = if Vagrant::Util::Platform.windows?
                 else
                   YAML.load_file 'conf/shares.yaml'
                 end
-RAM = '6144'
+RAM = '6144'.freeze
 Vagrant.configure('2') do |config|
-  config.vm.box = "ubuntu/bionic64"
+  config.vm.box = 'ubuntu/bionic64'
   config.disksize.size = '100GB' if Vagrant.has_plugin?('vagrant-disksize')
   config.vm.box_check_update = false
 
@@ -47,6 +47,7 @@ Vagrant.configure('2') do |config|
 
     SYNCED_FOLDER['vm']['shares'].each_pair do |_share, share_conf|
       next unless File.exist?(share_conf['host_dir'])
+
       vbox_config.vm.synced_folder share_conf['host_dir'],
                                    share_conf['vm_mount_point'],
                                    type: share_conf['type']
