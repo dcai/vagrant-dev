@@ -13,6 +13,7 @@
     name: "{{ home_username }}"
     password: "{{ home_username }}"
     group: "{{ home_usergroup }}"
+    shell: /usr/bin/fish
     groups: sudo,admin
     append: yes
     state: present
@@ -55,6 +56,20 @@
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
     mode: 0755
+
+- name: USER | git clone .tmuxp
+  git:
+    repo: https://github.com/dcai/.tmuxp.git
+    dest: "{{ home_dir }}/.tmuxp"
+    depth: 1
+
+- name: USER | chmod 755 ~/.tmuxp
+  file:
+    path: "{{ home_dir }}/.tmuxp"
+    state: directory
+    owner: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
+    mode: 0775
 
 - name: USER | download .bashrc
   get_url:
