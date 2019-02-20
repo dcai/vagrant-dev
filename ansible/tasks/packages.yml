@@ -26,6 +26,7 @@
         aptitude,
         aria2,
         cmake,
+        golang,
         htop,
         jq,
         "mariadb-client-{{ mariadb_version }}",
