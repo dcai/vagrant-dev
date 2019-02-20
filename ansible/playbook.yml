@@ -39,9 +39,6 @@
     - include: tasks/nginx.yml
     - include: tasks/sys.yml
     # - include: tasks/partition.yml
-    - name: apt | refresh cache
-      apt: update_cache=yes
-      when: apt.changed
 
   handlers:
     - name: restart nginx
