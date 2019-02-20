@@ -98,28 +98,33 @@
 - name: USER | .gitconfig.local
   blockinfile:
     create: yes
+    owner: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
     path: "{{ home_dir }}/.gitconfig.local"
     block: |
       [user]
         name = Dongsheng Cai
         email = d@tux.im
 
+- name: USER | .npmrc
+  blockinfile:
+    create: yes
+    owner: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
+    path: "{{ home_dir }}/.npmrc"
+    block: |
+      prefix=~/.npm-packages
+
 - name: USER | install fzf
   git:
     repo: https://github.com/junegunn/fzf.git
     dest: "{{ home_dir }}/.fzf"
     depth: 1
+
 - name: USER | chmod 755 ~/.fzf
   file:
     path: "{{ home_dir }}/.fzf"
     state: directory
-    owner: "{{ home_username }}"
-    group: "{{ home_usergroup }}"
-    mode: 0775
-
-- name: USER | change .fzf directory ownership
-  file:
-    path: "{{ home_dir }}/.fzf"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
     mode: 0775
