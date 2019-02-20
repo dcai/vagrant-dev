@@ -25,6 +25,7 @@
       [
         aptitude,
         aria2,
+        aspell,
         cmake,
         golang,
         htop,
