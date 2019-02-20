@@ -27,6 +27,7 @@
         aria2,
         aspell,
         cmake,
+        emacs-nox,
         golang,
         htop,
         jq,
