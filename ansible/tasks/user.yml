@@ -87,13 +87,19 @@
     group: "{{ home_usergroup }}"
     mode: 0640
 
-- name: USER | download .gitconfig
-  get_url:
-    url: https://gist.githubusercontent.com/dcai/2030ba4091ae888aa0e023c2e2018554/raw/06a6d3990a708b628285bf0a811435c6b3660696/.gitconfig
-    dest: "{{ home_dir }}/.gitconfig"
+- name: USER | ~/.config/git
+  git:
+    # https://gist.github.com/dcai/2030ba4091ae888aa0e023c2e2018554
+    repo: https://gist.github.com/2030ba4091ae888aa0e023c2e2018554.git
+    dest: "{{ home_dir }}/.config/git"
+    depth: 1
+
+- name: USER | ~/.config/git ownership
+  file:
+    path: "{{ home_dir }}/.config/git"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
-    mode: 0640
+    mode: 0755
 
 - name: USER | .gitconfig.local
   blockinfile:
