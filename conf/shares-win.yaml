@@ -8,5 +8,5 @@ vm:
       owner: "vagrant"
       group: "vagrant"
       host_dir: 'C:\Users\dcai\Dropbox'
-      vm_mount_point: "/home/ubuntu/Dropbox"
+      vm_mount_point: "/home/vagrant/Dropbox"
       type: ""
