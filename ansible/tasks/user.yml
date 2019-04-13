@@ -116,7 +116,7 @@
 
 - name: USER | Fix directory ownership
   file:
-    src: "{{ item.dir }}"
+    path: "{{ item.dir }}"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
     mode: 0755
