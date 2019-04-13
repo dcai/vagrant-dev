@@ -47,6 +47,7 @@
 - name: USER | .vim
   git:
     repo: https://github.com/dcai/.vim.git
+    force: yes
     dest: "{{ home_dir }}/.vim"
     depth: 1
 
