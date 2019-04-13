@@ -6,6 +6,7 @@
     state: latest
     pkg:
       [
+        "php-codesniffer",
         "php{{ php_version }}",
         "php{{ php_version }}-fpm",
         "php{{ php_version }}-cli",
