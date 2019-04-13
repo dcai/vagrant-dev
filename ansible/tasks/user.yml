@@ -51,26 +51,24 @@
     dest: "{{ home_dir }}/.vim"
     depth: 1
 
-- name: USER | .vim ownership
-  file:
-    path: "{{ home_dir }}/.vim"
-    owner: "{{ home_username }}"
-    group: "{{ home_usergroup }}"
-    mode: 0755
-
 - name: USER | git clone .tmuxp
   git:
     repo: https://github.com/dcai/.tmuxp.git
     dest: "{{ home_dir }}/.tmuxp"
     depth: 1
 
-- name: USER | chmod 755 ~/.tmuxp
-  file:
-    path: "{{ home_dir }}/.tmuxp"
-    state: directory
-    owner: "{{ home_username }}"
-    group: "{{ home_usergroup }}"
-    mode: 0775
+- name: USER | ~/.config/git
+  git:
+    # https://gist.github.com/dcai/2030ba4091ae888aa0e023c2e2018554
+    repo: https://gist.github.com/2030ba4091ae888aa0e023c2e2018554.git
+    dest: "{{ home_dir }}/.config/git"
+    depth: 1
+
+- name: USER | install fzf
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: "{{ home_dir }}/.fzf"
+    depth: 1
 
 - name: USER | download .bashrc
   get_url:
@@ -80,6 +78,14 @@
     group: "{{ home_usergroup }}"
     mode: 0640
 
+- name: USER | diff-so-fancy
+  get_url:
+    url: https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
+    dest: "{{ home_dir }}/.local/bin/diff-so-fancy"
+    owner: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
+    mode: 0740
+
 - name: USER | download .tmux.conf
   get_url:
     url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/9295d4db1781be6b8f7852fab68cae0c63831ab9/.tmux.conf
@@ -87,20 +93,6 @@
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
     mode: 0640
-
-- name: USER | ~/.config/git
-  git:
-    # https://gist.github.com/dcai/2030ba4091ae888aa0e023c2e2018554
-    repo: https://gist.github.com/2030ba4091ae888aa0e023c2e2018554.git
-    dest: "{{ home_dir }}/.config/git"
-    depth: 1
-
-- name: USER | ~/.config/git ownership
-  file:
-    path: "{{ home_dir }}/.config/git"
-    owner: "{{ home_username }}"
-    group: "{{ home_usergroup }}"
-    mode: 0755
 
 - name: USER | .gitconfig.local
   blockinfile:
@@ -122,16 +114,14 @@
     block: |
       prefix=~/.npm-packages
 
-- name: USER | install fzf
-  git:
-    repo: https://github.com/junegunn/fzf.git
-    dest: "{{ home_dir }}/.fzf"
-    depth: 1
-
-- name: USER | chmod 755 ~/.fzf
+- name: USER | Fix directory ownership
   file:
-    path: "{{ home_dir }}/.fzf"
-    state: directory
+    src: "{{ item.dir }}"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
-    mode: 0775
+    mode: 0755
+  with_items:
+    - { dir: "{{ home_dir }}/.vim" }
+    - { dir: "{{ home_dir }}/.fzf" }
+    - { dir: "{{ home_dir }}/.tmuxp" }
+    - { dir: "{{ home_dir }}/.config/git" }
