@@ -28,3 +28,12 @@
     name: "nodejs={{ nodejs_version|regex_replace('x', '') }}*"
     state: present
     update_cache: yes
+
+- name: NPM | .npmrc
+  blockinfile:
+    create: yes
+    owner: "{{ home_username }}"
+    group: "{{ home_usergroup }}"
+    path: "{{ home_dir }}/.npmrc"
+    block: |
+      prefix=~/.npm-packages

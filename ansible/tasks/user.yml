@@ -105,15 +105,6 @@
         name = Dongsheng Cai
         email = d@tux.im
 
-- name: USER | .npmrc
-  blockinfile:
-    create: yes
-    owner: "{{ home_username }}"
-    group: "{{ home_usergroup }}"
-    path: "{{ home_dir }}/.npmrc"
-    block: |
-      prefix=~/.npm-packages
-
 - name: USER | Fix directory ownership
   file:
     path: "{{ item.dir }}"
