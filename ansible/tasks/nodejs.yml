@@ -37,3 +37,11 @@
     path: "{{ home_dir }}/.npmrc"
     block: |
       prefix=~/.npm-packages
+
+- name: NPM | install global packages
+  npm: state=present global=yes name={{ item }}
+  with_items:
+    - prettier
+    - eslint
+    - typescript
+    - tslint
