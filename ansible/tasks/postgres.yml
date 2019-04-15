@@ -28,10 +28,16 @@
     line: "listen_addresses = '*'"
     state: present
 
-- name: Postgres | change listen_addresses to '*'
-  lineinfile:
-    state: present
-    path: "/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf"
-    line: "host    all             all             0.0.0.0/0               trust"
+- name: Postgres | Copy config
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "postgres"
+    group: "postgres"
+  with_items:
+    - {
+        src: "templates/postgres/pg_hba.conf",
+        dest: "/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf",
+      }
   notify:
     - restart postgresql
