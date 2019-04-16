@@ -27,7 +27,7 @@
     - name: set timezone to Etc/UTC
       timezone:
         name: Etc/UTC
-    - include: tasks/packages.yml
+    - include: tasks/apt.yml
     - include: tasks/user.yml
     - include: tasks/nodejs.yml
     - include: tasks/pip.yml
