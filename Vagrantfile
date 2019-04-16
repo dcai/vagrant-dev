@@ -38,7 +38,7 @@ Vagrant.configure('2') do |config|
     ports = (3000..3020).to_a
     ports.push(3306) # mysql
     ports.push(5432) # postgres
-    ports.push(8000, 8080) # common http
+    ports.push(8000, 8008, 8080, 8088) # common http
     ports.push(9229) # nodejs inspector port
     ports.each do |port|
       vbox_config.vm.network :forwarded_port, guest: port, host: port
