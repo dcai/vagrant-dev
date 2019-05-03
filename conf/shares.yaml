@@ -7,12 +7,12 @@ vm:
     vagrant:
       host_dir: "."
       vm_mount_point: "/vagrant"
-      owner: "{{ home_username }}"
-      group: "{{ home_username }}"
+      owner: "vagrant"
+      group: "vagrant"
       type: ""
     dropbox:
-      owner: "{{ home_username }}"
-      group: "{{ home_username }}"
+      owner: "vagrant"
+      group: "vagrant"
       host_dir: "../Dropbox/"
-      vm_mount_point: "/home/ubuntu/Dropbox"
+      vm_mount_point: "/home/vagrant/Dropbox"
       type: ""
