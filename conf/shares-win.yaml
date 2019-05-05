@@ -7,6 +7,6 @@ vm:
     dropbox:
       owner: "vagrant"
       group: "vagrant"
-      host_dir: 'C:\Users\dcai\Dropbox'
+      host_dir: 'd:\Dropbox'
       vm_mount_point: "/home/vagrant/Dropbox"
       type: ""
