@@ -11,4 +11,4 @@
     state: present
     extra_args: "--user --upgrade"
     # vim-vint+pathlib+pyping is for vint: vimscript linting
-    name: [tmuxp, pgcli, mycli, httpie, vim-vint, pathlib, typing]
+    name: [tmuxp, mycli, httpie, vim-vint, pathlib, typing]
