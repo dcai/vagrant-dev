@@ -72,6 +72,8 @@
   file:
     path: /var/www
     state: directory
+    owner: "{{ httpd_user }}"
+    group: "{{ httpd_group }}"
 
 - name: phpMyAdmin | Purge directory
   file:

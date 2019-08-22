@@ -42,6 +42,7 @@
     state: directory
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
+    recurse: yes
     mode: 0775
 
 - name: USER | .vim
@@ -105,11 +106,12 @@
         name = Dongsheng Cai
         email = d@tux.im
 
-- name: USER | Fix directory ownership
+- name: USER | chmod/chown user directories
   file:
     path: "{{ item.dir }}"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
+    recurse: yes
     mode: 0755
   with_items:
     - { dir: "{{ home_dir }}/.vim" }

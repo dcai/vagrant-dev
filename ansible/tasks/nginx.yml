@@ -10,12 +10,13 @@
     update_cache: yes
 
 - name: NGINX | Fix wwwroot permissions
-  file: path={{ httpd_wwwroot }}
-    owner={{ httpd_user }}
-    group={{ httpd_group }}
-    mode=0775
-    state=directory
-    recurse=yes
+  file:
+    path: "{{ httpd_wwwroot }}"
+    owner: "{{ httpd_user }}"
+    group: "{{ httpd_group }}"
+    mode: 0775
+    state: directory
+    recurse: yes
 
 - name: NGINX | Copy the templates to their respestive estination
   template:
