@@ -22,16 +22,15 @@ Vagrant.configure('2') do |config|
   config.disksize.size = '100GB' if Vagrant.has_plugin?('vagrant-disksize')
   config.vm.box_check_update = false
 
-  config.vm.provider 'hyperv' do |h, hyperv_config|
-    hyperv_config.vm.box = 'generic/ubuntu1604'
+  # config.vm.provider 'hyperv' do |h, hyperv_config|
+    # hyperv_config.vm.box = 'generic/ubuntu1604'
     # h.enable_virtualization_extensions = true
-    h.memory = RAM
-
-    hyperv_config.vm.synced_folder '.', '/vagrant',
-                                   type: 'smb',
-                                   smb_username: 'vagrant',
-                                   smb_password: 'vagrant'
-  end
+    # h.memory = RAM
+    # hyperv_config.vm.synced_folder '.', '/vagrant',
+                                   # type: 'smb',
+                                   # smb_username: 'vagrant',
+                                   # smb_password: 'vagrant'
+  # end
 
   config.vm.provider 'virtualbox' do |v, vbox_config|
     vbox_config.vm.network 'public_network', ip: '172.16.0.2'
