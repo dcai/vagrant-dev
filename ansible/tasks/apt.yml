@@ -36,6 +36,7 @@
         memcached,
         mosh,
         ncdu,
+        ntp,
         p7zip,
         python-pip,
         python3-pip,
