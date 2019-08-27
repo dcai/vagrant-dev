@@ -45,12 +45,15 @@
     recurse: yes
     mode: 0775
 
-- name: USER | .vim
+- name: USER | git clone .vim
   git:
     repo: https://github.com/dcai/.vim.git
     force: yes
     dest: "{{ home_dir }}/.vim"
     depth: 1
+
+- name: USER | install vim plugins
+  command: vim +PlugInstall +qall
 
 - name: USER | git clone .tmuxp
   git:
@@ -65,11 +68,14 @@
     dest: "{{ home_dir }}/.config/git"
     depth: 1
 
-- name: USER | install fzf
+- name: USER | clone fzf
   git:
     repo: https://github.com/junegunn/fzf.git
     dest: "{{ home_dir }}/.fzf"
     depth: 1
+
+- name: USER | install fzf
+  command: "{{ home_dir }}/.fzf/install --all"
 
 - name: USER | download .bashrc
   get_url:
