@@ -49,6 +49,7 @@
         software-properties-common,
         tig,
         tmux,
+        tmuxp,
         tree,
         unrar,
         unzip,
