@@ -61,6 +61,12 @@
     dest: "{{ home_dir }}/.tmuxp"
     depth: 1
 
+- name: USER | git clone .tmuxinator
+  git:
+    repo: https://github.com/dcai/.tmuxinator.git
+    dest: "{{ home_dir }}/.tmuxinator"
+    depth: 1
+
 - name: USER | ~/.config/git
   git:
     # gist url: https://gist.github.com/dcai/2030ba4091ae888aa0e023c2e2018554
@@ -124,4 +130,5 @@
     - { dir: "{{ home_dir }}/.vim" }
     - { dir: "{{ home_dir }}/.fzf" }
     - { dir: "{{ home_dir }}/.tmuxp" }
+    - { dir: "{{ home_dir }}/.tmuxinator" }
     - { dir: "{{ home_dir }}/.config/git" }

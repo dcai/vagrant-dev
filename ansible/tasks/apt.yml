@@ -23,6 +23,7 @@
     state: present
     pkg:
       [
+        "mariadb-client-{{ mariadb_version }}",
         aptitude,
         aria2,
         aspell,
@@ -31,7 +32,6 @@
         golang,
         htop,
         jq,
-        "mariadb-client-{{ mariadb_version }}",
         mcrypt,
         memcached,
         mosh,
@@ -39,8 +39,10 @@
         ntp,
         ntpdate,
         p7zip,
+        pgcli,
         python-pip,
         python3-pip,
+        python3-tmuxp,
         python3-venv,
         redis-server,
         ruby,
@@ -49,7 +51,7 @@
         software-properties-common,
         tig,
         tmux,
-        tmuxp,
+        tmuxinator,
         tree,
         unrar,
         unzip,
