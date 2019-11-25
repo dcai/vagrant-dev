@@ -11,4 +11,13 @@
     state: present
     extra_args: "--user --upgrade"
     # vim-vint+pathlib+pyping is for vint: vimscript linting
-    name: [pipenv, mycli, httpie, vim-vint, pathlib, typing]
+    name: [pipenv, vim-vint, pathlib, typing]
+
+- name: Pip | install venv for black
+  command:
+    cmd: "/usr/bin/virtualenv -p /usr/bin/python3 {{ home_dir }}/.local/python-black"
+
+- name: Pip | install black
+  pip:
+    name: black
+    virtualenv: "{{ home_dir }}/.local/python-black"
