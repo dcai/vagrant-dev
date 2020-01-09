@@ -58,5 +58,7 @@
         unrar,
         unzip,
         virtualenv,
+        # wamerican,
+        wbritish,
         xz-utils,
       ]
