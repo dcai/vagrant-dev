@@ -60,5 +60,6 @@
         virtualenv,
         # wamerican,
         wbritish,
+        wajig,
         xz-utils,
       ]

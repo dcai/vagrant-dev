@@ -52,9 +52,6 @@
     dest: "{{ home_dir }}/.vim"
     depth: 1
 
-- name: USER | install vim plugins
-  command: vim +PlugInstall +qall
-
 - name: USER | git clone .tmuxp
   git:
     repo: https://github.com/dcai/.tmuxp.git
@@ -65,6 +62,12 @@
   git:
     repo: https://github.com/dcai/.tmuxinator.git
     dest: "{{ home_dir }}/.tmuxinator"
+    depth: 1
+
+- name: USER | git clone .tmuxp
+  git:
+    repo: https://github.com/dcai/.tmuxp.git
+    dest: "{{ home_dir }}/.tmuxp"
     depth: 1
 
 - name: USER | ~/.config/git
@@ -102,7 +105,7 @@
 
 - name: USER | download .tmux.conf
   get_url:
-    url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/9295d4db1781be6b8f7852fab68cae0c63831ab9/.tmux.conf
+    url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/fd36a484b44ba9a58d27b7d9ab6e47eef9d988fc/.tmux.conf
     dest: "{{ home_dir }}/.tmux.conf"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
