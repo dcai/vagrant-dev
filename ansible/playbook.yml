@@ -20,9 +20,9 @@
     httpd_wwwroot: "/var/www"
     httpd_user: "{{ home_username }}"
     httpd_group: "{{ home_username }}"
-    php_version: "7.2"
-    nodejs_version: "10.x"
-    phpmyadmin_version: "4.8.5"
+    php_version: "7.4"
+    nodejs_version: "12.x"
+    phpmyadmin_version: "5.0.1"
   tasks:
     - name: set timezone to Etc/UTC
       timezone:
