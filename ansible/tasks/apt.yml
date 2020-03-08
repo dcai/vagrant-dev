@@ -15,14 +15,14 @@
 - name: "Ubuntu | Install ripgrep {{version}}"
   apt:
     deb: "https://github.com/BurntSushi/ripgrep/releases/download/{{version}}/ripgrep_{{version}}_amd64.deb"
+    dpkg_options: "--force-overwrite"
   vars:
     version: 11.0.2
 
 - name: Ubuntu | Install packages
   apt:
     state: present
-    pkg:
-      [
+    pkg: [
         "mariadb-client-{{ mariadb_version }}",
         aptitude,
         aria2,
