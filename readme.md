@@ -14,6 +14,7 @@
 - `mkdir vg`
 - `cd vg`
 - `vagrant init friendlyrobot/dev`
+- `vagrant plugin install vagrant-vbguest` # optional, install vbguest plugin
 - `vagrant up`
 
 ## Rebuild
@@ -22,6 +23,7 @@
 
 - `git clone https://github.com/dcai/vagrant-dev.git vg`
 - `cd vg`
+- `vagrant plugin install vagrant-vbguest` # install vbguest plugin
 - `vagrant up`
 
 

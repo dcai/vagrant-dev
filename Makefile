@@ -1,10 +1,8 @@
 all:
-	echo "vagrant up"
+	vagrant plugin install vagrant-vbguest
 
 install-plugins:
-	echo "=> Install vagrant proxy conf plugin"
 	vagrant plugin install vagrant-proxyconf
-	echo "=> Install vagrant disksize plugin"
 	vagrant plugin install vagrant-disksize
 
 install-rubocop:
