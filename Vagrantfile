@@ -18,8 +18,8 @@ SYNCED_FOLDER = if Vagrant::Util::Platform.windows?
                 end
 RAM = '6144'.freeze
 Vagrant.configure('2') do |config|
-  config.vm.box = 'ubuntu/bionic64'
-  config.disksize.size = '100GB' if Vagrant.has_plugin?('vagrant-disksize')
+  config.vm.box = 'friendlyrobot/bionic64'
+  # config.disksize.size = '1500GB' if Vagrant.has_plugin?('vagrant-disksize')
   config.vm.box_check_update = false
 
   config.vm.provider 'virtualbox' do |v, vbox_config|
@@ -42,9 +42,9 @@ Vagrant.configure('2') do |config|
                                    type: share_conf['type']
     end
 
-    disk_file = File.join(VAGRANT_ROOT, '/hdd/dev.vdi')
+    disk_file = File.join(VAGRANT_ROOT, '/disk2.vdi')
     unless File.exist?(disk_file)
-      v.customize ['createhd', '--filename', disk_file, '--size', 500 * 1024]
+      v.customize ['createhd', '--filename', disk_file, '--size', 1000 * 1024]
     end
     v.customize ['storageattach', :id,
                  '--storagectl', 'SCSI',
