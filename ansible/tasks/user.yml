@@ -72,8 +72,8 @@
 
 - name: USER | ~/.config/git
   git:
-    # gist url: https://gist.github.com/dcai/2030ba4091ae888aa0e023c2e2018554
-    repo: https://gist.github.com/2030ba4091ae888aa0e023c2e2018554.git
+    # gist url: https://gist.github.com/dcai/2885623
+    repo: https://gist.github.com/2885623.git
     dest: "{{ home_dir }}/.config/git"
     depth: 1
 
@@ -89,7 +89,7 @@
 - name: USER | download .bashrc
   get_url:
     # gist url: https://gist.github.com/dcai/3847582
-    url: https://gist.githubusercontent.com/dcai/3847582/raw/4aa5d1f56963298e819c5d24bf8da13f2806e6d9/.bashrc
+    url: https://gist.githubusercontent.com/dcai/3847582/raw/55b1c1e14e95b2e3d964a67c89232869b5c413db/.bashrc
     dest: "{{ home_dir }}/.bashrc"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
@@ -105,7 +105,8 @@
 
 - name: USER | download .tmux.conf
   get_url:
-    url: https://gist.githubusercontent.com/dcai/a2e7ca940babda0c7137/raw/fd36a484b44ba9a58d27b7d9ab6e47eef9d988fc/.tmux.conf
+    # gist url: https://gist.github.com/dcai/3824286
+    url: https://gist.githubusercontent.com/dcai/3824286/raw/30aa60f7d714c0e13980d39fb1ba84790681429a/.tmux.conf
     dest: "{{ home_dir }}/.tmux.conf"
     owner: "{{ home_username }}"
     group: "{{ home_usergroup }}"
