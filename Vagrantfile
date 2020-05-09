@@ -24,8 +24,11 @@ Vagrant.configure('2') do |config|
 
   config.vm.provider 'virtualbox' do |v, vbox_config|
     vbox_config.vm.network 'public_network', ip: '172.16.0.2'
-    ports = (3001..3020).to_a
+    ports = (3000..3010).to_a
+    ports.push(3100, 3300)
     ports.push(3306) # mysql
+    ports.push(4000, 4040, 4400)
+    ports.push(5000, 5001, 5050, 5500)
     ports.push(5432) # postgres
     ports.push(8000, 8008, 8080, 8088) # common http
     ports.push(9229) # nodejs inspector port
